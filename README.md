@@ -41,7 +41,7 @@ sudo mount -t nfs 172.42.42.100:/srv/nfs/kubedata /mnt
 mount | grep kubedata 
 sudo umount /mnt 
 
-cd kubernetes/yamls/
+cd kubernetes/yamls/nfs-provisioning
 
 
 
