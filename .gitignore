@@ -1,1 +1,4 @@
-**/.vagrant
+.vagrant
+.ansible
+*.code-workspace
+*console*.log
