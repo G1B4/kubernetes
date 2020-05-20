@@ -1,12 +1,8 @@
 # kubernetes
 Kubernetes playground environment, vagrant file will create a Master and 2 Workers nodes.   KubeAdm is used to create the cluster.
 
-Pending in master node:
-sudo yum install git -y
-sudo yum install wget -y
-
 ## Cloning the Repo
-git clone <repo>
+git clone https://github.com/G1B4/kubernetes.git
 
 ## Helm (https://helm.sh/docs/intro/install/)  
 

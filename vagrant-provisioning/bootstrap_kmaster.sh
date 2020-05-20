@@ -10,10 +10,16 @@ mkdir /home/vagrant/.kube
 cp /etc/kubernetes/admin.conf /home/vagrant/.kube/config
 chown -R vagrant:vagrant /home/vagrant/.kube
 
+# INSTALL MISSING PACKAGES
+echo "[TASK 4] Install git and wget"
+sudo yum install git -y
+sudo yum install wget -y
+
 # Deploy Calico network
-echo "[TASK 3] Deploy Calico network"
+echo "[TASK 5] Deploy Calico network"
 su - vagrant -c "kubectl create -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml"
 
 # Generate Cluster join command
-echo "[TASK 4] Generate and save cluster join command to /joincluster.sh"
+echo "[TASK 6] Generate and save cluster join command to /joincluster.sh"
 kubeadm token create --print-join-command > /joincluster.sh
+
