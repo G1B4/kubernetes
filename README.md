@@ -90,13 +90,13 @@ kubectl -n kubernetes-dashboard describe service kubernetes-dashboard  (to check
 kubectl -n kubernetes-dashboard edit service kubernetes-dashboard  (change type to NodePort, add nodePort: 32000 below targetPort)  
 
 cd kubernetes/dashboard  
-kubectl create -f sa_cluster_admin.yaml 
-kubectl -n kube-system describe sa dashboard-admin 
-kubectl -n kube-system describe secret dashboard-admin-token-cd9bb 
+kubectl create -f sa_cluster_admin.yaml  
+kubectl -n kube-system describe sa dashboard-admin  
+kubectl -n kube-system describe secret dashboard-admin-token-cd9bb  
 
-Access to the dashboard at: https://172.42.42.101:32323/ and paste the toekn of the previous step. 
+Access to the dashboard at: https://172.42.42.101:32323/ and paste the token of the previous step.   
 
-## TroubleShooting
+## TroubleShooting  
 
-https://docs.bitnami.com/tutorials/troubleshoot-kubernetes-deployments/ 
+https://docs.bitnami.com/tutorials/troubleshoot-kubernetes-deployments/  
 
