@@ -85,7 +85,7 @@ https://www.youtube.com/watch?v=rx1A7k-m6_g
 
 Since dashboard service is ClusterIP, can't be accessed from outside. So, we need to edit the service and convert it to NodePort. 
 
-Steps: 
+Steps:  
 kubectl -n kubernetes-dashboard describe service kubernetes-dashboard  (to check how the service is actually configured)  
 kubectl -n kubernetes-dashboard edit service kubernetes-dashboard  (change type to NodePort, add nodePort: 32000 below targetPort)  
 
