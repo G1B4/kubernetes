@@ -25,11 +25,11 @@ spec:
             - name: PROVISIONER_NAME
               value: example.com/nfs
             - name: NFS_SERVER
-              value: <<NFS Server IP>>
+              value: 172.42.42.100
             - name: NFS_PATH
               value: /srv/nfs/kubedata
       volumes:
         - name: nfs-client-root
           nfs:
-            server: <<NFS Server IP>>
+            server: 172.42.42.100
             path: /srv/nfs/kubedata
