@@ -69,12 +69,20 @@ Goto folder srv/nfs/kubedata (you will see the volume and the file there)
 
 
 
-## Prometheus and Grafagna
-helm search repo prometheous
-https://www.youtube.com/watch?v=rx1A7k-m6_g
+## Prometheus  
+helm search repo prometheus
+https://youtu.be/CmPdyvgmw-A?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0 (minute: 13)
+
+cd /home/vagrant/kubernetes/yamls  
+mkdir prometheus  
+cd prometheus    
+helm inspect values stable/prometheus > prometheus.values   
+vi prometheus.values (something need to be changed, see video)
+kubectl create namespace prometheus
+helm install prometheus stable/prometheus  --values prometheus.values --namespace prometheus
 
 
-
+## Grafagna
 
 
 ## Metal LB
