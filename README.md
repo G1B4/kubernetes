@@ -60,7 +60,7 @@ kubectl exec -it busybox -- ./bin/sh (create a file using touch)
 Goto folder srv/nfs/kubedata (you will see the volume and the file there)
 
 Or I can run everything in one shoot:  
-kubectl create -f 1-rbac.yaml -f 2-class.yaml -f 3-deployment.yaml -f 4-pvc-nfs.yaml
+kubectl create -f 1-rbac.yaml -f 2-class.yaml -f 3-deployment.yaml -f 4-pvc-nfs.yaml  
 
 
 
