@@ -69,20 +69,25 @@ Goto folder srv/nfs/kubedata (you will see the volume and the file there)
 
 
 
-## Prometheus  
-helm search repo prometheus
-https://youtu.be/CmPdyvgmw-A?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0 (minute: 13)
+## Prometheus   ( https://youtu.be/CmPdyvgmw-A?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0  - minute: 13 )
+cd /home/vagrant/kubernetes/yamls/prometheus  
+helm search repo prometheus  
+kubectl create namespace prometheus  
+helm install prometheus stable/prometheus  --values prometheus.values --namespace prometheus  
 
-cd /home/vagrant/kubernetes/yamls  
-mkdir prometheus  
-cd prometheus    
-helm inspect values stable/prometheus > prometheus.values   
-vi prometheus.values (something need to be changed, see video)
-kubectl create namespace prometheus
-helm install prometheus stable/prometheus  --values prometheus.values --namespace prometheus
+**Notes:**  
+Create config file run the folowing : helm inspect values stable/prometheus > prometheus.values   
+Edit the file: vi prometheus.values (Change type for Cluster it to NodePort and add a nodePort:32322 for service prometheus-server)  
 
+## Grafagna  ( https://youtu.be/CmPdyvgmw-A?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0  - minute: 19 )  
+cd /home/vagrant/kubernetes/yamls/grafana  
+helm search repo grafana  
+kubectl create namespace grafana  
+helm install grafana stable/grafana  --values grafana.values --namespace grafana  
 
-## Grafagna
+**Notes:**  
+Create config file run the folowing : helm inspect values stable/grafana > grafana.values   
+Edit the file: vi grafana.values (Change type for Cluster it to NodePort and add a nodePort:32323 value for service prometheus-server, change adminPassword: grafana1234, change persistence to true)
 
 
 ## Metal LB
