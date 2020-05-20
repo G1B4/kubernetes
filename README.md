@@ -22,7 +22,7 @@ helm install gabophpadmin stable/phpmyadmin
 
 To migrate from a previous version of helm to version 3, see the following video https://youtu.be/aAPtT4uaY1o?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0
 
-## Create Dynamic NFS Provisioning ( https://blog.exxactcorp.com/deploying-dynamic-nfs-provisioning-in-kubernetes/ )
+## Create NFS Server
 
 Login to Kmaster.
 
@@ -35,12 +35,19 @@ sudo systemctl status nfs-server
 sudo vi /etc/exports -> add the following: /srv/nfs/kubedata    *(rw,sync,no_subtree_check,no_root_squash,no_all_squash,insecure) 
 sudo exportfs -rav 
   
-To test login a worker node and run the following: 
+**Testing** -> login into a worker node and run the following: 
 sudo mount -t nfs 172.42.42.100:/srv/nfs/kubedata /mnt 
 mount | grep kubedata 
 sudo umount /mnt 
 
-cd kubernetes/yamls/nfs-provisioning 
+## Create Dynamic NFS Provisioning ( https://blog.exxactcorp.com/deploying-dynamic-nfs-provisioning-in-kubernetes/ )
+
+
+cd /  
+cd /home/vagrant/kubernetes/yamls/nfs-provisioning  
+kubectl create -f 1-rbac.yaml -f 2-class.yaml -f 3-deployment.yaml -f 4-pvc-nfs.yaml  
+
+**Or you can run everything in multipe steps and verify each of them:** 
 kubectl create -f 1-rbac.yaml 
 kubectl create -f 2-class.yaml  
 kubectl create -f 3-deployment.yaml (Change IP for Kmaster Ip address) 
@@ -49,14 +56,15 @@ kubectl describe pod nfs-client-provisioner-<XXXX>
 kubectl get pv,pvc  (There aren't any of them) 
 ls /srv/nfs/kubedata/ (There's nothing here too)  
 kubectl create -f 4-pvc-nfs.yaml
-kubectl get pvc,pv  
-kubectl create -f 4-busybox-pv-nfs.yaml (create a pod to test persist volume claim)  
-kubectl exec -it busybox -- ./bin/sh (create a file using touch)  
+kubectl get pvc,pv
 
+**Testing** 
+kubectl create -f busybox-pv-nfs.yaml (create a pod to test persist volume claim)  
+kubectl exec -it busybox -- ./bin/sh (create a file using touch)  
 Goto folder srv/nfs/kubedata (you will see the volume and the file there)
 
-Or I can run everything in one shoot:  
-kubectl create -f 1-rbac.yaml -f 2-class.yaml -f 3-deployment.yaml -f 4-pvc-nfs.yaml  
+ 
+  
 
 
 
