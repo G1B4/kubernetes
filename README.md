@@ -6,18 +6,18 @@ git clone https://github.com/G1B4/kubernetes.git
 
 ## Helm (https://helm.sh/docs/intro/install/)  
 
-Select the version of Helm you want to install to from (https://github.com/helm/helm/releases)
-Then, run the following command for master node: 
+Select the version of Helm you want to install to from (https://github.com/helm/helm/releases).
+Then, run the following command from master node: 
 
 wget https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz  
 tar zxf helm-v3.2.1-linux-amd64.tar.gz 
 cd linux-amd64  
 sudo mv helm /usr/local/bin/helm 
 which helm (to check it was moved properly)  
-helm version --short 
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-helm search repo phpmyadmin (to check if repo was added correctly)
-helm install gabophpadmin stable/phpmyadmin
+helm version --short  
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/  
+helm search repo phpmyadmin (to check if repo was added correctly)  
+helm install gabophpadmin stable/phpmyadmin  
 
 
 To migrate from a previous version of helm to version 3, see the following video https://youtu.be/aAPtT4uaY1o?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0
@@ -26,19 +26,19 @@ To migrate from a previous version of helm to version 3, see the following video
 
 Login to Kmaster.
 
-sudo mkdir /srv/nfs/kubedata -p 
-sudo chown nfsnobody: /srv/nfs/kubedata/ 
-sudo yum install -y nfs-utils 
-sudo systemctl enable nfs-server 
-sudo systemctl start nfs-server 
-sudo systemctl status nfs-server 
-sudo vi /etc/exports -> add the following: /srv/nfs/kubedata    *(rw,sync,no_subtree_check,no_root_squash,no_all_squash,insecure) 
-sudo exportfs -rav 
+sudo mkdir /srv/nfs/kubedata -p  
+sudo chown nfsnobody: /srv/nfs/kubedata/   
+sudo yum install -y nfs-utils   
+sudo systemctl enable nfs-server   
+sudo systemctl start nfs-server   
+sudo systemctl status nfs-server   
+sudo vi /etc/exports -> add the following: /srv/nfs/kubedata    *(rw,sync,no_subtree_check,no_root_squash,no_all_squash,insecure)   
+sudo exportfs -rav   
   
-**Testing** -> login into a worker node and run the following: 
-sudo mount -t nfs 172.42.42.100:/srv/nfs/kubedata /mnt 
-mount | grep kubedata 
-sudo umount /mnt 
+**Testing** -> login into a worker node and run the following:   
+sudo mount -t nfs 172.42.42.100:/srv/nfs/kubedata /mnt   
+mount | grep kubedata   
+sudo umount /mnt   
 
 ## Create Dynamic NFS Provisioning ( https://blog.exxactcorp.com/deploying-dynamic-nfs-provisioning-in-kubernetes/ )
 
