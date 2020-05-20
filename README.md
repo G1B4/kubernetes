@@ -27,6 +27,9 @@ helm install gabophpadmin stable/phpmyadmin
 To migrate from a previous version of helm to version 3, see the following video https://youtu.be/aAPtT4uaY1o?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0
 
 ## Create Dynamic NFS Provisioning ( https://blog.exxactcorp.com/deploying-dynamic-nfs-provisioning-in-kubernetes/ )
+
+Login to Kmaster.
+
 sudo mkdir /srv/nfs/kubedata -p 
 sudo chown nfsnobody: /srv/nfs/kubedata/ 
 sudo yum install -y nfs-utils 
@@ -41,7 +44,24 @@ sudo mount -t nfs 172.42.42.100:/srv/nfs/kubedata /mnt
 mount | grep kubedata 
 sudo umount /mnt 
 
-cd kubernetes/yamls/nfs-provisioning
+cd kubernetes/yamls/nfs-provisioning 
+kubectl create -f 1-rbac.yaml 
+kubectl create -f 2-class.yaml  
+kubectl create -f 3-deployment.yaml (Change IP for Kmaster Ip address) 
+kubectl get all  
+kubectl describe pod nfs-client-provisioner-<XXXX>  
+kubectl get pv,pvc  (There aren't any of them) 
+ls /srv/nfs/kubedata/ (There's nothing here too)  
+kubectl create -f 4-pvc-nfs.yaml
+kubectl get pvc,pv  
+kubectl create -f 4-busybox-pv-nfs.yaml (create a pod to test persist volume claim)  
+kubectl exec -it busybox -- ./bin/sh (create a file using touch)  
+
+Goto folder srv/nfs/kubedata (you will see the volume and the file there)
+
+Or I can run everything in one shoot:  
+kubectl create -f 1-rbac.yaml -f 2-class.yaml -f 3-deployment.yaml -f 4-pvc-nfs.yaml
+
 
 
 
@@ -71,3 +91,8 @@ kubectl -n kube-system describe sa dashboard-admin
 kubectl -n kube-system describe secret dashboard-admin-token-cd9bb 
 
 Access to the dashboard at: https://172.42.42.101:32323/ and paste the toekn of the previous step. 
+
+## TroubleShooting
+
+https://docs.bitnami.com/tutorials/troubleshoot-kubernetes-deployments/ 
+
