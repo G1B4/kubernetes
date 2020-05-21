@@ -75,6 +75,8 @@ helm search repo prometheus
 kubectl create namespace prometheus  
 helm install prometheus stable/prometheus  --values prometheus.values --namespace prometheus  
 
+Now yo can access to the serve for a web browser: http://172.42.42.101:32322  
+
 **Notes:**  
 Create config file run the folowing : helm inspect values stable/prometheus > prometheus.values   
 Edit the file: vi prometheus.values (Change type for Cluster it to NodePort and add a nodePort:32322 for service prometheus-server)  
@@ -85,14 +87,35 @@ helm search repo grafana
 kubectl create namespace grafana  
 helm install grafana stable/grafana  --values grafana.values --namespace grafana  
 
+Now yo can access to the serve for a web browser: http://172.42.42.101:32323  
+
+Additional Steps:  
+1) Define the prometheus server as datasource  
+2) Create DashBoard, goto https://grafana.com/grafana/dashboards?direction=asc&orderBy=name&dataSource=prometheus and download as a json.
+3) 
+
+
 **Notes:**  
 Create config file run the folowing : helm inspect values stable/grafana > grafana.values   
 Edit the file: vi grafana.values (Change type for Cluster it to NodePort and add a nodePort:32323 value for service prometheus-server, change adminPassword: grafana1234, change persistence to true)
 
 
-## Metal LB
+## Ingress
 
 
+## Logs
+
+## Metal LB (https://youtu.be/xYiYIjlAgHY?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0)
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml  
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml  
+# On first install only
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+cd /home/vagrant/kubernetes/yamls/metallb
+
+
+## Jenkins (https://youtu.be/ObGR0EfVPlg?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0)
+
+## SonarQube
 
 ## Dashboard (https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
 
