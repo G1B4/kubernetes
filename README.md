@@ -110,7 +110,8 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manife
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml  
 # On first install only
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-cd /home/vagrant/kubernetes/yamls/metallb
+cd /home/vagrant/kubernetes/yamls/metallb  
+kubectl apply -f config.yaml  
 
 
 ## Jenkins (https://youtu.be/ObGR0EfVPlg?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0)
