@@ -108,10 +108,14 @@ Edit the file: vi grafana.values (Change type for Cluster it to NodePort and add
 ## Metal LB (https://youtu.be/xYiYIjlAgHY?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0)
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml  
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml  
-# On first install only
-kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+**On first install only**
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"  
 cd /home/vagrant/kubernetes/yamls/metallb  
 kubectl apply -f config.yaml  
+
+testing:  
+kubectl create deployment --image nginx my-nginx  
+kubectl expose deploy my-nginx --port 80 --type LoadBalancer  
 
 
 ## Jenkins (https://youtu.be/ObGR0EfVPlg?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0)
@@ -137,3 +141,12 @@ Access to the dashboard at: https://172.42.42.101:32323/ and paste the token of 
 
 https://docs.bitnami.com/tutorials/troubleshoot-kubernetes-deployments/  
 
+## Theory  
+
+Services -> https://www.youtube.com/watch?v=5lzUpDtmWgM  
+Ingress -> https://youtu.be/VicH6KojwCI?list=PL2We04F3Y_43dAehLMT5GxJhtk3mJtkl5
+Logging with EFK/ELK -> https://youtu.be/mwToMPpDHfg
+Kubernetes Hteory -> 
+
+##Full webApp/Database Example  
+https://www.callicoder.com/deploy-spring-mysql-react-nginx-kubernetes-persistent-volume-secret/  
