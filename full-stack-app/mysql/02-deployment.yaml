@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment                    # Type of the kubernetes resource
 metadata:
   name: polling-app-mysql           # Name of the deployment
+  namespace: full-stack-app           
   labels:                           # Labels applied to this deployment 
     app: polling-app
 spec:

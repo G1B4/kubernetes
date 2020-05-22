@@ -2,6 +2,7 @@ apiVersion: apps/v1             # API version
 kind: Deployment                # Type of kubernetes resource
 metadata:
   name: polling-app-client      # Name of the kubernetes resource
+  namespace: full-stack-app
 spec:
   replicas: 1                   # No of replicas/pods to run
   selector:                     
