@@ -2,6 +2,7 @@
 Kubernetes playground environment, vagrant file will create a Master and 2 Workers nodes.   KubeAdm is used to create the cluster.
 
 ## Cloning the Repo
+cd /home/vagrant
 git clone https://github.com/G1B4/kubernetes.git
 
 ## Helm (https://helm.sh/docs/intro/install/)  
@@ -45,7 +46,7 @@ sudo umount /mnt
 
 cd /  
 cd /home/vagrant/kubernetes/yamls/nfs-provisioning  
-kubectl create -f 1-rbac.yaml -f 2-class.yaml -f 3-deployment.yaml -f 4-pvc-nfs.yaml  
+kubectl create -f 1-rbac.yaml -f 2-class.yaml -f 3-deployment.yaml
 
 **Or you can run everything in multipe steps and verify each of them:** 
 kubectl create -f 1-rbac.yaml 
