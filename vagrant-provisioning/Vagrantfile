@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
     kmaster.vm.provision "shell", path: "bootstrap_kmaster.sh"
   end
 
-  NodeCount = 2
+  NodeCount = 1
 
   # Kubernetes Worker Nodes
   (1..NodeCount).each do |i|
@@ -32,8 +32,8 @@ Vagrant.configure(2) do |config|
       workernode.vm.network "private_network", ip: "172.42.42.10#{i}"
       workernode.vm.provider "virtualbox" do |v|
         v.name = "kworker#{i}"
-        v.memory = 1024
-        v.cpus = 1
+        v.memory = 2048
+        v.cpus = 2
         # Prevent VirtualBox from interfering with host audio stack
         v.customize ["modifyvm", :id, "--audio", "none"]
       end
