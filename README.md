@@ -69,7 +69,7 @@ Goto folder srv/nfs/kubedata (you will see the volume and the file there)
 cd /home/vagrant/kubernetes/yamls/jenkins  
 helm search repo jenkins  
 kubectl create namespace jenkins  
-helm install prometheus stable/jenkins  --values jenkins.values --namespace jenkins  
+helm install jenkins stable/jenkins  --values jenkins.values --namespace jenkins  
 
 **Notes:**  
 Create config file run the folowing : helm inspect values stable/jenkins > jenkins.values   
