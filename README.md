@@ -23,7 +23,7 @@ helm install gabophpadmin stable/phpmyadmin
 
 To migrate from a previous version of helm to version 3, see the following video https://youtu.be/aAPtT4uaY1o?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0
 
-## Create NFS Server
+## Create NFS Server (optional)
 
 Login to Kmaster.
 
@@ -64,9 +64,16 @@ kubectl create -f busybox-pv-nfs.yaml (create a pod to test persist volume claim
 kubectl exec -it busybox -- ./bin/sh (create a file using touch)  
 Goto folder srv/nfs/kubedata (you will see the volume and the file there)
 
- 
-  
 
+## Jenkins  
+cd /home/vagrant/kubernetes/yamls/jenkins  
+helm search repo jenkins  
+kubectl create namespace jenkins  
+helm install prometheus stable/jenkins  --values jenkins.values --namespace jenkins  
+
+**Notes:**  
+Create config file run the folowing : helm inspect values stable/jenkins > jenkins.values   
+Edit the file: vi jenkins.values (Change type for Cluster it to NodePort and add a nodePort:32320 for service jenkins-XXXXXX)
 
 
 
