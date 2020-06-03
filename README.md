@@ -23,7 +23,7 @@ helm install gabophpadmin stable/phpmyadmin
 
 To migrate from a previous version of helm to version 3, see the following video https://youtu.be/aAPtT4uaY1o?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0
 
-## Create NFS Server (optional)
+## Create NFS Server (we are going to use this for Kubernetes pv and pvc)
 
 Login to Kmaster.
 
@@ -42,7 +42,6 @@ mount | grep kubedata
 sudo umount /mnt   
 
 ## Create Dynamic NFS Provisioning ( https://blog.exxactcorp.com/deploying-dynamic-nfs-provisioning-in-kubernetes/ )
-
 
 cd /  
 cd /home/vagrant/kubernetes/yamls/nfs-provisioning  
@@ -64,6 +63,10 @@ kubectl create -f busybox-pv-nfs.yaml (create a pod to test persist volume claim
 kubectl exec -it busybox -- ./bin/sh (create a file using touch)  
 Goto folder srv/nfs/kubedata (you will see the volume and the file there)
 
+## Traefik
+cd /home/vagrant/kubernetes/helm/traefik  
+helm search repo traefik  
+helm install traefik stable/traefik --values traefik.values  
 
 ## Jenkins  
 cd /home/vagrant/kubernetes/yamls/jenkins  
