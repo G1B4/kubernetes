@@ -23,6 +23,22 @@ helm install gabophpadmin stable/phpmyadmin
 
 To migrate from a previous version of helm to version 3, see the following video https://youtu.be/aAPtT4uaY1o?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0
 
+
+## Metal LB (be able to create Load Balancers on Bare Metal)
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml  
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml  
+**On first install only**
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"  
+cd /home/vagrant/kubernetes/yamls/metallb   (Maybe you need to changte the port ranges where the Metal LB will be created)
+kubectl apply -f config.yaml  
+
+testing:  
+kubectl create deployment --image nginx my-nginx  
+kubectl expose deploy my-nginx --port 80 --type LoadBalancer 
+
+Source: https://youtu.be/xYiYIjlAgHY?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0
+
+
 ## Create NFS Server (we are going to use this for Kubernetes pv and pvc)
 
 Login to Kmaster.
@@ -63,7 +79,7 @@ kubectl create -f busybox-pv-nfs.yaml (create a pod to test persist volume claim
 kubectl exec -it busybox -- ./bin/sh (create a file using touch)  
 Goto folder srv/nfs/kubedata (you will see the volume and the file there)
 
-## Traefik
+## Traefik (Ingress)
 cd /home/vagrant/kubernetes/helm/traefik  
 helm search repo traefik  
 helm install traefik stable/traefik --values traefik.values  
@@ -116,17 +132,6 @@ Edit the file: vi grafana.values (Change type for Cluster it to NodePort and add
 
 ## Logs
 
-## Metal LB (https://youtu.be/xYiYIjlAgHY?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0)
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml  
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml  
-**On first install only**
-kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"  
-cd /home/vagrant/kubernetes/yamls/metallb  
-kubectl apply -f config.yaml  
-
-testing:  
-kubectl create deployment --image nginx my-nginx  
-kubectl expose deploy my-nginx --port 80 --type LoadBalancer  
 
 
 ## Jenkins (https://youtu.be/ObGR0EfVPlg?list=PL34sAs7_26wNBRWM6BDhnonoA5FMERax0)
