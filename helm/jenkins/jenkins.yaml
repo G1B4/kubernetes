@@ -8,6 +8,14 @@ master:
   serviceType: NodePort
   nodePort: 32377
 
+JCasC:
+    enabled: true
+    PluginVersion: 1.36
+    ConfigScripts: |
+      welcome-message:
+        jenkins:
+          systemMessage: Welcome Gabo!
+
 persistence:
   storageClass: "managed-nfs-storage"
   accessMode: "ReadWriteOnce"
