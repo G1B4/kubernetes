@@ -3,7 +3,7 @@ master:
   adminPassword: "admin1234"
   installPlugins:
   serviceType: NodePort
-  nodePort: 32377
+  nodePort: 32333
     - kubernetes:latest
     - workflow-job:latest
     - workflow-aggregator:latest
