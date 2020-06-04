@@ -1,0 +1,47 @@
+master:
+  adminUser: "admin"
+  adminPassword: "admin1234"
+  installPlugins:
+  serviceType: NodePort
+  nodePort: 32377
+    - kubernetes:latest
+    - workflow-job:latest
+    - workflow-aggregator:latest
+    - credentials-binding:latest
+    - git:latest
+  image: "jenkins/jenkins"
+  tag: "2.226-slim"
+  RunAsUser: 1000
+  FsGroup: 1000
+  sidecars:
+    configAutoReload:
+      enabled: true
+  JCasC:
+    enabled: true
+    PluginVersion: 1.36
+    ConfigScripts: |
+      welcome-message:
+        jenkins:
+          systemMessage: Welcome Gabo!
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "1024Mi"
+    limits:
+      cpu: "1"
+      memory: "3500Mi"
+  javaOpts: "-Xms3500m -Xmx3500m"
+agent:
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "512Mi"
+persistence:
+  storageClass: "managed-nfs-storage"
+  accessMode: "ReadWriteOnce"
+  size: "10Gi"
+rbac:
+  create: true

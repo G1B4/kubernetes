@@ -88,7 +88,7 @@ helm install traefik stable/traefik --values traefik.values
 cd /home/vagrant/kubernetes/yamls/jenkins  
 helm search repo jenkins  
 kubectl create namespace jenkins  
-helm install jenkins stable/jenkins  --values jenkins.values --namespace jenkins  
+helm install jenkins stable/jenkins  --values jenkins.yaml --namespace jenkins  
 
 **Notes:**  
 Create config file run the folowing : helm inspect values stable/jenkins > jenkins.values   
