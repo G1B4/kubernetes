@@ -3,7 +3,7 @@ master:
   adminPassword: "admin1234"
   resources:
     limits:
-      cpu: "1000m"
+      cpu: "1500m"
       memory: "1024Mi"
   serviceType: NodePort
   nodePort: 32320
