@@ -101,7 +101,7 @@ master:
   # If you disable the non-Jenkins identity store and instead use the Jenkins internal one,
   # you should revert master.adminUser to your preferred admin user:
   adminUser: "admin"
-  # adminPassword: <defaults to random>
+  adminPassword: "admin1234"
   admin:
     existingSecret: ""
     userKey: jenkins-admin-user
@@ -146,7 +146,7 @@ master:
   targetPort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
-  serviceType: ClusterIP
+  serviceType: NodePort
   # Jenkins master service annotations
   serviceAnnotations: {}
   # Jenkins master custom labels
@@ -159,7 +159,7 @@ master:
   # Put labels on Jenkins master pod
   podLabels: {}
   # Used to create Ingress record (should used with ServiceType: ClusterIP)
-  # nodePort: <to set explicitly, choose port between 30000-32767
+  nodePort: 32020
   # Enable Kubernetes Liveness and Readiness Probes
   # ~ 2 minutes to allow Jenkins to restart when upgrading plugins. Set ReadinessTimeout to be shorter than LivenessTimeout.
   healthProbes: true
@@ -595,10 +595,9 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass:
-  annotations: {}
+  storageClass: "managed-nfs-storage"
   accessMode: "ReadWriteOnce"
-  size: "8Gi"
+  size: "5Gi"
   volumes:
   #  - name: nothing
   #    emptyDir: {}

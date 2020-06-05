@@ -58,8 +58,7 @@ mount | grep kubedata
 sudo umount /mnt   
 
 ## Create Dynamic NFS Provisioning ( https://blog.exxactcorp.com/deploying-dynamic-nfs-provisioning-in-kubernetes/ )
-
-cd /  
+ 
 cd /home/vagrant/kubernetes/yamls/nfs-provisioning  
 kubectl create -f 1-rbac.yaml -f 2-class.yaml -f 3-deployment.yaml
 
@@ -85,10 +84,10 @@ helm search repo traefik
 helm install traefik stable/traefik --values traefik.values  
 
 ## Jenkins  
-cd /home/vagrant/kubernetes/yamls/jenkins  
+cd /home/vagrant/kubernetes/helm/jenkins  
 helm search repo jenkins  
 kubectl create namespace jenkins  
-helm install jenkins stable/jenkins  --values jenkins.yaml --namespace jenkins  
+helm install jenkins stable/jenkins  --values jenkins2.yaml --namespace jenkins  
 
 **Notes:**  
 Create config file run the folowing : helm inspect values stable/jenkins > jenkins.values   
