@@ -87,7 +87,10 @@ helm install traefik stable/traefik --values traefik.values
 cd /home/vagrant/kubernetes/helm/jenkins  
 helm search repo jenkins  
 kubectl create namespace jenkins  
-helm install jenkins stable/jenkins  --values jenkins2.yaml --namespace jenkins  
+helm install jenkins stable/jenkins  --values jenkins.yaml --namespace jenkins  
+
+To check logs run the following:  
+
 
 **Notes:**  
 Create config file run the folowing : helm inspect values stable/jenkins > jenkins.values   
@@ -99,7 +102,7 @@ Edit the file: vi jenkins.values (Change type for Cluster it to NodePort and add
 cd /home/vagrant/kubernetes/yamls/prometheus  
 helm search repo prometheus  
 kubectl create namespace prometheus  
-helm install prometheus stable/prometheus  --values prometheus.values --namespace prometheus  
+helm install prometheus stable/prometheus  --values prometheus.yaml --namespace prometheus  
 
 Now yo can access to the serve for a web browser: http://172.42.42.101:32322  
 
@@ -111,7 +114,7 @@ Edit the file: vi prometheus.values (Change type for Cluster it to NodePort and 
 cd /home/vagrant/kubernetes/yamls/grafana  
 helm search repo grafana  
 kubectl create namespace grafana  
-helm install grafana stable/grafana  --values grafana.values --namespace grafana  
+helm install grafana stable/grafana  --values grafana.yaml --namespace grafana  
 
 Now yo can access to the serve for a web browser: http://172.42.42.101:32323  
 
